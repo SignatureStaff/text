@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Open text</title>
+<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:480px;margin:40px auto;padding:0 20px;color:#222}
+a.btn{display:block;text-align:center;background:#5b5fc7;color:#fff;padding:16px;border-radius:10px;text-decoration:none;font-size:18px;margin:20px 0}
+pre{white-space:pre-wrap;background:#f3f3f3;padding:12px;border-radius:8px}</style></head><body>
+<h2 id="h">Opening Messages…</h2><a id="go" class="btn" href="#">Tap here to open the text</a>
+<p>To: <b id="to"></b></p><pre id="msg"></pre>
+<script>
+var p=new URLSearchParams(location.hash.slice(1)||location.search.slice(1));
+var n=(p.get('n')||'').replace(/[^0-9+]/g,''),b=p.get('b')||'';
+var ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
+var url='sms:'+n+(ios?'&':'?')+'body='+encodeURIComponent(b);
+document.getElementById('go').href=url;document.getElementById('to').textContent=n;document.getElementById('msg').textContent=b;
+if(n){location.href=url}else{document.getElementById('h').textContent='No number in this link'}
+</script></body></html>
