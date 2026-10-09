@@ -6,10 +6,13 @@ pre{white-space:pre-wrap;background:#f3f3f3;padding:12px;border-radius:8px}</sty
 <h2 id="h">Opening Messages…</h2><a id="go" class="btn" href="#">Tap here to open the text</a>
 <p>To: <b id="to"></b></p><pre id="msg"></pre>
 <script>
-var p=new URLSearchParams(location.hash.slice(1)||location.search.slice(1));
+function go(){var p=new URLSearchParams(location.hash.slice(1)||location.search.slice(1));
 var n=(p.get('n')||'').replace(/[^0-9+]/g,''),b=p.get('b')||'';
 var ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
 var url='sms:'+n+(ios?'&':'?')+'body='+encodeURIComponent(b);
 document.getElementById('go').href=url;document.getElementById('to').textContent=n;document.getElementById('msg').textContent=b;
-if(n){location.href=url}else{document.getElementById('h').textContent='No number in this link'}
+if(n){document.getElementById('h').textContent='Opening Messages…';location.href=url}else{document.getElementById('h').textContent='No number in this link'}}
+go();
+window.addEventListener('hashchange',go);
+window.addEventListener('pageshow',function(e){if(e.persisted)go()});
 </script></body></html>
